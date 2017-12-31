@@ -25,5 +25,13 @@
             "name": "Alexander M. Turek",
             "email": "me@derrabus.de"
         }
-    ]
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
 }
