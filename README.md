@@ -1,5 +1,7 @@
 # php ereg shim
 
+[![Build Status](https://travis-ci.org/derrabus/php-ereg-shim.svg?branch=master)](https://travis-ci.org/derrabus/php-ereg-shim)
+
 This package emulates the old php extension for POSIX regular expressions
 (ereg) if it's not available. Internally, the PCRE extension is used to process
 regular expressions.
