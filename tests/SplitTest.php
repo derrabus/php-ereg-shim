@@ -8,12 +8,18 @@ class SplitTest extends TestCase
 {
     private $oldErrorReporting;
 
-    protected function setUp()
+    /**
+     * @before
+     */
+    protected function setupErrorReporting()
     {
         $this->oldErrorReporting = \error_reporting(E_ALL & ~E_DEPRECATED);
     }
 
-    protected function tearDown()
+    /**
+     * @after
+     */
+    protected function restoreErrorReporting()
     {
         \error_reporting($this->oldErrorReporting);
     }
