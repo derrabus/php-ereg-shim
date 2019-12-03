@@ -53,8 +53,8 @@ final class Ereg
             return 1;
         }
 
-        $regs = array_map(
-            function ($match) {
+        $regs = \array_map(
+            static function ($match) {
                 return $match === '' ? false : $match;
             },
             $matches
