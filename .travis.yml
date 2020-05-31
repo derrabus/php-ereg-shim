@@ -1,17 +1,23 @@
 language: php
 
-dist: xenial
+dist: bionic
 
 php:
-  - '5.6'
-  - '7.0'
   - '7.3'
   - '7.4'
+  - nightly
 
 matrix:
   include:
     - php: '5.3'
       dist: precise
+    - php: '5.6'
+      dist: xenial
+    - php: '7.0'
+      dist: xenial
+
+before_install:
+    - if [ $TRAVIS_PHP_VERSION = "nightly" ]; then composer config platform.php 7.4.99; fi;
 
 install: composer install
 
