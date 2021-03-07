@@ -2,8 +2,6 @@
 
 namespace Rabus\EregShim;
 
-use PHPUnit\Framework\TestCase;
-
 class EregiReplaceTest extends TestCase
 {
     private $oldErrorReporting;
@@ -134,6 +132,23 @@ class EregiReplaceTest extends TestCase
             array('b$', 'ba'),
             // FIXME
             // array('[:alpha:]', 'x'),
+        );
+    }
+
+    /**
+     * @dataProvider provideEmptyPatterns
+     */
+    public function testEmptyPattern($pattern)
+    {
+        $this->expectEmptyPatternWarning('eregi_replace');
+        $this->assertFalse(\eregi_replace($pattern, 'def', 'abc123'));
+    }
+
+    public function provideEmptyPatterns()
+    {
+        return array(
+            array(null),
+            array(''),
         );
     }
 }

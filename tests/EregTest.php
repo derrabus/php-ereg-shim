@@ -2,8 +2,6 @@
 
 namespace Rabus\EregShim;
 
-use PHPUnit\Framework\TestCase;
-
 class EregTest extends TestCase
 {
     private $oldErrorReporting;
@@ -112,7 +110,7 @@ class EregTest extends TestCase
     public function provideNonMatchingTestCases()
     {
         return array(
-            array('.*doesn\'t exist.*','This is a nice and simple string'),
+            array('.*doesn\'t exist.*', 'This is a nice and simple string'),
             array('A', 'a'),
             array('[A-Z]', '0'),
             array('(a){4}', 'aaa'),
@@ -120,6 +118,24 @@ class EregTest extends TestCase
             array('b$', 'ba'),
             // FIXME
             // array('[:alpha:]', 'x'),
+        );
+    }
+
+    /**
+     * @dataProvider provideEmptyPatterns
+     */
+    public function testEmptyPattern($pattern)
+    {
+        $this->expectEmptyPatternWarning('ereg');
+
+        $this->assertFalse(\ereg($pattern, 'This is a nice and simple string'));
+    }
+
+    public function provideEmptyPatterns()
+    {
+        return array(
+            array(null),
+            array(''),
         );
     }
 }

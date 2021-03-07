@@ -2,8 +2,6 @@
 
 namespace Rabus\EregShim;
 
-use PHPUnit\Framework\TestCase;
-
 class SplitiTest extends TestCase
 {
     private $oldErrorReporting;
@@ -173,6 +171,23 @@ class SplitiTest extends TestCase
             array('b$', '--- ba ---'),
             // FIXME
             // array('[:alpha:]', '--- x ---'),
+        );
+    }
+
+    /**
+     * @dataProvider provideEmptyPatterns
+     */
+    public function testEmptyPattern($pattern)
+    {
+        $this->expectEmptyPatternWarning('spliti');
+        $this->assertFalse(\spliti($pattern, 'This is a nice and simple string'));
+    }
+
+    public function provideEmptyPatterns()
+    {
+        return array(
+            array(null),
+            array(''),
         );
     }
 }

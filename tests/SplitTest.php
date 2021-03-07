@@ -2,8 +2,6 @@
 
 namespace Rabus\EregShim;
 
-use PHPUnit\Framework\TestCase;
-
 class SplitTest extends TestCase
 {
     private $oldErrorReporting;
@@ -28,7 +26,15 @@ class SplitTest extends TestCase
     {
         $this->assertSame(
             array('this', 'is', 'a', 'test'),
-            \split("[[:space:]]","this is\ta\ntest")
+            \split("[[:space:]]", "this is\ta\ntest")
+        );
+    }
+
+    public function testNullString()
+    {
+        $this->assertSame(
+            array(''),
+            \split("[[:space:]]", null)
         );
     }
 
@@ -164,6 +170,23 @@ class SplitTest extends TestCase
             array('b$', '--- ba ---'),
             // FIXME
             // array('[:alpha:]', '--- x ---'),
+        );
+    }
+
+    /**
+     * @dataProvider provideEmptyPatterns
+     */
+    public function testEmptyPattern($pattern)
+    {
+        $this->expectEmptyPatternWarning('split');
+        $this->assertFalse(\split($pattern, 'This is a nice and simple string'));
+    }
+
+    public function provideEmptyPatterns()
+    {
+        return array(
+            array(null),
+            array(''),
         );
     }
 }
