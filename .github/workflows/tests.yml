@@ -35,10 +35,6 @@ jobs:
                     extensions: "pcre"
                     php-version: "${{ matrix.php }}"
 
-            -   name: Configure composer
-                if: ${{ matrix.php == '8.1' }}
-                run: composer config platform.php 8.0.99
-
             -   name: Install dependencies
                 run: composer update --ansi --no-progress --no-interaction
 
