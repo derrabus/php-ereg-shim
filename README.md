@@ -15,7 +15,7 @@ composer require derrabus/ereg-shim
 
 This should auto-register the shim for you. However, it remains inactive as
 long as the ereg extension is active. It should be safe to include it in
-projects that should be tested on php 5 and php 7 simultaneously.
+projects that should be tested on php 5 and php 7/8 simultaneously.
 
 You can also force the usage of the shim implementation on php 5 by directly
 calling the corresponding methods on the `Rabus\EregShim\Ereg` class.
@@ -26,10 +26,10 @@ Global function call        | Forced shimmed function call
 
 ## Purpose and limitations
 
-This library can be helpful if you need to migrate a legacy codebase to php 7.0
-quickly. It will be slower than the native implementation and is not intended
-to be a permanent solution. Code that depends on the ereg extension should be
-refactored to use the corresponding PCRE functions instead.
+This library can be helpful if you need to quicky migrate a legacy codebase to
+php 7.0 and beyond. It will be slower than the native implementation and is not
+intended to be a permanent solution. Code that depends on the ereg extension
+should be refactored to use the corresponding PCRE functions instead.
 
 The library has been developed against the test suite of the php 5.6 ereg
 extension in order to get as close to the original behavior as possible. While
